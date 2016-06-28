@@ -1,0 +1,13 @@
+<p> <b> Name: </b>
+  <%= @episode.name %>
+</p>
+
+<p> <b> Description: </b>
+  <%= @episode.description %>
+</p>
+
+<% if current_user_subscriped? %>
+    <h3> You are watching the video </h3>
+<% else %>
+    <%= link_to 'Subscribe to Watch', new_subscription_path, class: 'btn btn-primary' %>
+<%end%>

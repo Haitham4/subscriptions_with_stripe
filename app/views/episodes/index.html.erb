@@ -1,0 +1,7 @@
+<h3>Episodes</h3>
+
+<% @episodes.each do |episode| %>
+    <h3> <%= link_to episode.name, episode %> </h3>
+<% end %>
+
+<h5> <%= link_to '+', new_episode_path %> </h5>
