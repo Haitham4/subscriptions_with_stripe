@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'episodes/update'
   get 'episodes/destroy'
   get 'episodes/edit'
+  get 'charges/:id', to: 'charges#show'
 
   root to: 'episodes#index'
 

@@ -92,6 +92,7 @@
 
         <div> <%= trans.card_type %> **** **** **** <%= trans.card_last4 %> </div>
         <div> Expires <%= trans.card_exp_month %> / <%= trans.card_exp_year%> </div>
+        <%= link_to 'Check receive', charges_show_path(id: trans.id), class: 'btn btn-default' %>
 
     <% end %>
 
