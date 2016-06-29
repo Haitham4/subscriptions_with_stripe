@@ -23,19 +23,30 @@ class SubscriptionsController < ApplicationController
                                    plan: "first_plan"
     )
 
+    puts "--------------> #{params[:card_last4]}"
+    puts "--------------> #{params[:card_exp_month]}"
+    puts "--------------> #{params[:card_exp_year]}"
+    puts "--------------> #{params[:card_brand]}"
+
     current_user.update(
                     stripe_id: customer.id,
                     stripe_subscription_id: subscription.id,
                     card_last4: params[:card_last4],
-                    card_exp_month: params[:exp_month],
-                    card_exp_year: params[:exp_year],
+                    card_exp_month: params[:card_exp_month],
+                    card_exp_year: params[:card_exp_year],
                     card_type: params[:card_brand]
     )
 
     redirect_to root_path
   end
 
-  def destory
+  def destroy
+    customer = Stripe::Customer.retrieve(current_user.stripe_id)
+    subscription = customer.subscriptions.retrieve(current_user.stripe_subscription_id)
+    subscription.delete
+    current_user.update(stripe_subscription_id: nil)
+
+    redirect_to root_path, notice: "You have cancelled your subscription"
   end
 
   private

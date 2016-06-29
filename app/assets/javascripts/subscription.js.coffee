@@ -1,12 +1,12 @@
 jQuery ->
 
-  Stripe.setPublishableKey("pk_test_hUhPtoNw4b4hCCjjAQ31S6Rs");
+  # Stripe.setPublishableKey("pk_test_hUhPtoNw4b4hCCjjAQ31S6Rs");
+  Stripe.setPublishableKey($("meta[name='stripe-key']").attr('content'));
   $form = $('#payment-form').submit (event) ->
 # Disable the submit button to prevent repeated clicks:
     $form.find('.submit').prop 'disabled', true
     # Request a token from Stripe:
     Stripe.card.createToken $form, stripeResponseHandler
-    alert 'Name'
     # Prevent the form from being submitted:
     false
 
@@ -26,6 +26,11 @@ stripeResponseHandler = (status, response) ->
 # Token was created!
 # Get the token ID:
     token = response.id
+
+    alert response.card.last4
+    alert response.card.exp_year
+    alert response.card.exp_month
+    alert response.card.brand
 
     # Insert the token ID into the form so it gets submitted to the server:
     $form.append $('<input type="hidden" name="stripeToken">').val(token)
