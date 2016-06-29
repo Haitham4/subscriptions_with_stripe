@@ -20,8 +20,6 @@ default: &default
 development:
   <<: *default
   database: subscriptions_with_stripe_development
-  username: root
-  password: 448844
 
 
 # Warning: The database defined as "test" will be erased and

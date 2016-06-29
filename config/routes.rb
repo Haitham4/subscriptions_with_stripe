@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount StripeEvent::Engine, at: "stripe"
+
   get 'episodes/show'
   get 'episodes/create'
   get 'episodes/new'
